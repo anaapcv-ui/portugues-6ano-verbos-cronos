@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 Leitura Guiada — Estação Cronos | Verbos · Português 6º ano</title>
+<style>
+  :root{
+    --bg:#0a0e27;--bg2:#111842;--card:#161d4a;--card2:#1d2657;
+    --linha:#2b3576;--txt:#e6e9ff;--txt2:#a9b2e8;
+    --ciano:#22d3ee;--ouro:#fbbf24;--magenta:#e879f9;--verde:#34d399;--vermelho:#fb7185;
+    --sombra:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',Tahoma,sans-serif;background:radial-gradient(1200px 600px at 20% -10%,#1b2668 0,transparent 60%),radial-gradient(1000px 500px at 100% 0,#3a1a5a 0,transparent 55%),var(--bg);color:var(--txt);line-height:1.65;padding:16px;font-size:17px;}
+  .container{max-width:840px;margin:0 auto;}
+  .topo{background:linear-gradient(135deg,#0f9bb3,#22d3ee 40%,#7c3aed);border-radius:20px;padding:26px;text-align:center;margin-bottom:16px;box-shadow:var(--sombra);position:relative;overflow:hidden;}
+  .topo:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.35) 0,transparent 6%),radial-gradient(circle at 70% 60%,rgba(255,255,255,.25) 0,transparent 5%),radial-gradient(circle at 40% 80%,rgba(255,255,255,.2) 0,transparent 4%);opacity:.5;}
+  .topo h1{font-size:1.65em;color:#04121f;text-shadow:0 1px 0 rgba(255,255,255,.3);position:relative;}
+  .topo .sub{color:#062033;font-weight:600;position:relative;margin-top:4px;}
+  .intro{background:var(--card);border:1px solid var(--linha);border-radius:14px;padding:16px 18px;margin-bottom:16px;color:var(--txt2);font-size:.95em;}
+  .intro b{color:var(--ciano);}
+  .painel{background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:10px 14px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;}
+  .painel .salvo{font-size:.8em;color:var(--txt2);}
+  .painel button{border:none;border-radius:8px;padding:7px 12px;font-size:.78em;font-weight:800;cursor:pointer;color:#04121f;}
+  .b-exp{background:var(--ciano);}.b-imp{background:var(--magenta);}.b-zerar{background:var(--vermelho);}
+  .prog{position:sticky;top:8px;background:var(--card2);border:1px solid var(--linha);border-radius:12px;padding:10px 14px;margin-bottom:16px;z-index:20;box-shadow:var(--sombra);}
+  .prog .lab{display:flex;justify-content:space-between;font-size:.85em;font-weight:800;color:var(--ciano);margin-bottom:6px;}
+  .prog-track{height:12px;background:#0c1233;border-radius:8px;overflow:hidden;border:1px solid var(--linha);}
+  .prog-fill{height:100%;background:linear-gradient(90deg,var(--ciano),var(--magenta));width:0;transition:width .35s;}
+  .bloco{background:var(--card);border:1px solid var(--linha);border-radius:16px;margin-bottom:14px;overflow:hidden;box-shadow:var(--sombra);}
+  .bloco.bloqueado{opacity:.55;}
+  .bloco-cab{display:flex;align-items:center;gap:12px;padding:15px 16px;cursor:pointer;background:linear-gradient(90deg,rgba(34,211,238,.10),transparent);}
+  .nb{width:34px;height:34px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--ciano),var(--magenta));color:#04121f;display:flex;align-items:center;justify-content:center;font-weight:900;}
+  .bloco.bloqueado .nb{background:#0c1233;color:var(--txt2);border:1px solid var(--linha);}
+  .tit{flex:1;font-weight:800;color:var(--txt);}
+  .tit small{display:block;font-weight:600;color:var(--ciano);font-size:.72em;letter-spacing:1px;text-transform:uppercase;}
+  .estado{font-size:1.2em;}
+  .bloco-corpo{display:none;padding:0 18px 18px;}
+  .bloco.aberto .bloco-corpo{display:block;}
+  .bloco-corpo p{margin:10px 0;}
+  .bloco-corpo h3{color:var(--ouro);margin:14px 0 4px;font-size:1.02em;}
+  .bloco-corpo b{color:#fff;}
+  .bloco-corpo i{color:var(--ciano);}
+  .exemplo{background:#0c1233;border:1px dashed var(--ciano);border-radius:10px;padding:10px 12px;margin:10px 0;color:var(--ciano);font-family:'Consolas',monospace;font-size:.92em;}
+  .destaque{background:rgba(251,191,36,.12);border-left:4px solid var(--ouro);border-radius:8px;padding:10px 12px;margin:12px 0;color:#fde9b0;font-size:.94em;}
+  .pergunta{background:var(--card2);border:1px solid var(--linha);border-radius:12px;padding:12px 14px;margin:12px 0;}
+  .pq{font-weight:700;color:var(--ouro);margin-bottom:8px;}
+  .pergunta textarea{width:100%;min-height:64px;background:#0c1233;color:var(--txt);border:2px solid var(--linha);border-radius:10px;padding:10px;font-family:inherit;font-size:.95em;resize:vertical;}
+  .pergunta textarea.ok{border-color:var(--verde);}
+  .modelo{display:none;margin-top:10px;background:rgba(52,211,153,.10);border:1px solid var(--verde);border-radius:10px;padding:10px 12px;font-size:.92em;color:#c9f7e5;}
+  .modelo.mostra{display:block;}
+  .modelo .mt{font-weight:800;color:var(--verde);margin-bottom:4px;}
+  .auto{display:none;margin-top:10px;gap:8px;flex-wrap:wrap;}
+  .auto.mostra{display:flex;}
+  .auto span{font-size:.85em;color:var(--txt2);align-self:center;}
+  .auto button{border:none;border-radius:8px;padding:8px 12px;font-weight:800;cursor:pointer;font-size:.82em;}
+  .a-ok{background:rgba(52,211,153,.2);color:var(--verde);border:1px solid var(--verde)!important;}
+  .a-rev{background:rgba(251,113,133,.2);color:var(--vermelho);border:1px solid var(--vermelho)!important;}
+  .auto button.sel{outline:3px solid #fff;}
+  .acao{margin-top:12px;text-align:center;}
+  .btn-conf{background:var(--cinza,#3a4488);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-weight:800;cursor:not-allowed;opacity:.5;font-size:1em;}
+  .btn-conf.ativo{background:linear-gradient(135deg,var(--ciano),var(--magenta));color:#04121f;cursor:pointer;opacity:1;}
+  .aviso{display:none;color:var(--vermelho);font-size:.85em;margin-top:8px;font-weight:700;}
+  .final{background:linear-gradient(135deg,#3a1a5a,#161d4a);border:1px solid var(--magenta);border-radius:16px;padding:20px;margin-top:18px;display:none;box-shadow:var(--sombra);}
+  .final.mostra{display:block;}
+  .final h2{color:var(--magenta);margin-bottom:8px;}
+  .peg{background:#0c1233;border:1px solid var(--linha);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.93em;}
+  .peg b{color:var(--ouro);}
+  table.cob{width:100%;border-collapse:collapse;margin-top:12px;font-size:.9em;}
+  table.cob th,table.cob td{border:1px solid var(--linha);padding:7px 9px;text-align:left;}
+  table.cob th{background:#0c1233;color:var(--ciano);}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap;}
+  .nav a{flex:1;text-align:center;background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:13px;color:var(--txt);text-decoration:none;font-weight:800;min-width:140px;}
+  .nav a.prox{background:linear-gradient(135deg,var(--ciano),var(--magenta));color:#04121f;}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(2,6,23,.8);z-index:100;align-items:center;justify-content:center;padding:16px;}
+  .overlay.show{display:flex;}
+  .modal{background:var(--card);border:1px solid var(--magenta);border-radius:18px;padding:24px;max-width:400px;text-align:center;box-shadow:var(--sombra);}
+  .modal h3{color:var(--magenta);margin-bottom:8px;}
+  .modal p{color:var(--txt2);font-size:.92em;margin-bottom:14px;}
+  .modal .mbtns{display:flex;gap:10px;justify-content:center;}
+  .modal button{border:none;border-radius:10px;padding:10px 18px;font-weight:800;cursor:pointer;}
+  .m-sim{background:var(--vermelho);color:#04121f;}.m-nao{background:#2b3576;color:#fff;}
+  @media(max-width:600px){.topo h1{font-size:1.3em;}body{font-size:16px;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topo">
+    <h1>📖 Leitura Guiada · Estação Cronos</h1>
+    <div class="sub">Português · 6º ano · Os Verbos e o Controle do Tempo</div>
+  </div>
+
+  <div class="intro">
+    🚀 <b>Bem-vindo(a), jovem cronauta!</b> Na Estação Cronos, os <b>verbos</b> são os motores que controlam o tempo. Vamos ligar um motor de cada vez. Em cada estação você <b>lê</b>, depois <b>escreve</b> as respostas das 3 perguntas (com suas palavras!). Só depois de clicar em <b>Conferir</b> a próxima estação se abre. No fim, tem uma caixa de <b>pegadinhas</b> e um mapa do que estudou. 💾 Tudo é salvo sozinho.
+  </div>
+
+  <div class="painel">
+    <div class="salvo" id="salvoInfo">💾 Suas respostas são salvas sozinhas.</div>
+    <div>
+      <button class="b-exp" onclick="exportar()">📥 Exportar</button>
+      <button class="b-imp" onclick="document.getElementById('arq').click()">📤 Importar</button>
+      <button class="b-zerar" onclick="pedirZerar()">🗑️ Zerar</button>
+      <input type="file" id="arq" accept=".json" style="display:none" onchange="importar(event)">
+    </div>
+  </div>
+
+  <div class="prog">
+    <div class="lab"><span id="progTxt">0 de 8 estações concluídas</span><span id="progPct">0%</span></div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+  </div>
+
+  <div id="blocos"></div>
+
+  <div class="final" id="final">
+    <h2>🎯 Sala de Pegadinhas — as 10 armadilhas dos Verbos</h2>
+    <div id="pegs"></div>
+    <h2 style="margin-top:16px;">🗺️ Mapa da Missão — Tópico → Estação</h2>
+    <table class="cob">
+      <tr><th>Tópico cobrado na prova</th><th>Estação</th></tr>
+      <tr><td>O que é verbo (ação, estado, fenômeno)</td><td>1</td></tr>
+      <tr><td>Número e Pessoa</td><td>2</td></tr>
+      <tr><td>Tempo e a ideia de Modo</td><td>3</td></tr>
+      <tr><td>Modo Indicativo</td><td>4</td></tr>
+      <tr><td>Tempos do Indicativo: presente, pretérito perfeito, futuro do presente</td><td>5</td></tr>
+      <tr><td>Modo Subjuntivo e seus tempos</td><td>6</td></tr>
+      <tr><td>Modo Imperativo</td><td>7</td></tr>
+      <tr><td>Formas nominais (infinitivo, gerúndio, particípio)</td><td>8</td></tr>
+    </table>
+    <div class="destaque" style="margin-top:14px;">✅ Terminou a leitura! Agora vá para o <b>Quiz</b> testar o que ficou fresco na memória.</div>
+  </div>
+
+  <div class="nav">
+    <a href="index.html">🏠 Início</a>
+    <a class="prox" href="verbos_quiz.html">🎯 Ir para o Quiz →</a>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>🗑️ Zerar tudo?</h3>
+    <p>Isso apaga TODAS as respostas desta Leitura Guiada (útil para outro cronauta usar do zero). Não dá para desfazer.</p>
+    <div class="mbtns">
+      <button class="m-nao" onclick="fecharModal()">Cancelar</button>
+      <button class="m-sim" onclick="confirmarZerar()">Sim, zerar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CHAVE='port6_verbos_leitura_v1';
+const BLOCOS=[
+ {
+  titulo:"O que é um verbo — o motor da frase",
+  faixa:"Estação 1 · Conceito",
+  corpo:`<p>O <b>verbo</b> é a palavra mais importante da frase: é ela que dá <b>movimento</b> ao que a gente diz. O verbo pode indicar:</p>
+  <p>🏃 <b>ação</b> (algo que alguém faz): <i>correr, estudar, pular</i>;<br>
+  🧍 <b>estado</b> (como algo/alguém está ou é): <i>ser, estar, ficar, parecer</i>;<br>
+  🌧️ <b>fenômeno da natureza</b>: <i>chover, ventar, nevar, anoitecer</i>.</p>
+  <p>Todo verbo tem uma <b>forma básica</b>, que é o <b>infinitivo</b> (termina em <b>-R</b>): <i>cantar, vender, partir</i>. Por causa dessa terminação, os verbos se dividem em <b>3 conjugações</b>:</p>
+  <div class="exemplo">1ª conjugação → termina em -AR (cantar, estudar)
+2ª conjugação → termina em -ER (vender, correr)
+3ª conjugação → termina em -IR (partir, sorrir)</div>
+  <p>O verbo também é <b>variável</b>: ele muda de forma para mostrar <b>quando</b>, <b>quem</b> e <b>de que jeito</b> a ação acontece. Essas mudanças são a <b>flexão verbal</b>, que veremos a seguir.</p>
+  <div class="destaque">💡 Truque: se você consegue colocar a palavra depois de "eu vou ___" (eu vou <i>correr</i>, eu vou <i>estudar</i>), provavelmente ela é um verbo no infinitivo.</div>`,
+  perguntas:[
+   {q:"O que um verbo pode indicar? Cite os três casos e um exemplo de cada.",m:"Pode indicar ação (correr, estudar), estado (ser, estar, ficar) e fenômeno da natureza (chover, ventar). Ele dá movimento à frase."},
+   {q:"O que é a forma do infinitivo e como ela termina?",m:"É a forma básica (o 'nome') do verbo e termina sempre em -R: cantar, vender, partir."},
+   {q:"A quais conjugações pertencem os verbos 'pular', 'correr' e 'sorrir'?",m:"'Pular' é da 1ª conjugação (-AR); 'correr' é da 2ª (-ER); 'sorrir' é da 3ª (-IR)."}
+  ]
+ },
+ {
+  titulo:"Número e Pessoa — quem realiza a ação",
+  faixa:"Estação 2 · Flexão",
+  corpo:`<p>O verbo muda de forma para combinar com <b>quem</b> pratica a ação. Isso envolve duas coisas: o <b>número</b> e a <b>pessoa</b>.</p>
+  <h3>Número</h3>
+  <p>Diz se é <b>um</b> ou <b>vários</b>: <b>singular</b> (uma pessoa) ou <b>plural</b> (mais de uma). <i>Eu canto</i> (singular) / <i>Nós cantamos</i> (plural).</p>
+  <h3>Pessoa</h3>
+  <p>Diz <b>quem</b> está no papel da ação. São três pessoas, no singular e no plural:</p>
+  <div class="exemplo">1ª pessoa → quem FALA:  eu (sing.) / nós (plural)
+2ª pessoa → com quem se fala:  tu (sing.) / vós (plural)
+3ª pessoa → de quem se fala:  ele/ela (sing.) / eles/elas (plural)</div>
+  <p>Repare como o final do verbo muda conforme a pessoa: <i>eu cant<b>o</b>, tu cant<b>as</b>, ele cant<b>a</b>, nós cant<b>amos</b>, vós cant<b>ais</b>, eles cant<b>am</b></i>. Essa parte que muda no fim chama-se <b>desinência</b>.</p>
+  <div class="destaque">⚠️ Pegadinha: o pronome pode estar escondido! Em "Estudamos muito", ninguém escreveu "nós", mas a forma "estud<b>amos</b>" já mostra que é a <b>1ª pessoa do plural (nós)</b>.</div>`,
+  perguntas:[
+   {q:"Qual a diferença entre número singular e plural no verbo? Dê um exemplo.",m:"Singular indica uma só pessoa (eu canto); plural indica mais de uma (nós cantamos). O verbo muda a forma para combinar."},
+   {q:"Quais são as três pessoas do discurso e os pronomes de cada uma (singular e plural)?",m:"1ª: eu / nós (quem fala); 2ª: tu / vós (com quem se fala); 3ª: ele-ela / eles-elas (de quem se fala)."},
+   {q:"Na frase 'Correram para a escola', em que pessoa e número está o verbo? Como você descobriu?",m:"3ª pessoa do plural (eles/elas). Descobri pela terminação '-ram' de 'correram', que indica esse grupo, mesmo sem o pronome escrito."}
+  ]
+ },
+ {
+  titulo:"Tempo e Modo — quando e de que jeito",
+  faixa:"Estação 3 · Tempo & Modo",
+  corpo:`<p>Além de pessoa e número, o verbo mostra o <b>tempo</b> e o <b>modo</b>.</p>
+  <h3>⏱️ Tempo: QUANDO acontece</h3>
+  <p>O verbo situa a ação no tempo em três grandes zonas:</p>
+  <div class="exemplo">Passado (pretérito) → já aconteceu:  Eu estudei.
+Presente → acontece agora/sempre:   Eu estudo.
+Futuro → ainda vai acontecer:       Eu estudarei.</div>
+  <h3>🎭 Modo: de que JEITO o falante encara o fato</h3>
+  <p>O <b>modo</b> mostra a <b>atitude</b> de quem fala. São três modos:</p>
+  <p>✅ <b>Indicativo</b> — trata o fato como <b>certo, real</b>: <i>"Ele estuda."</i><br>
+  🤔 <b>Subjuntivo</b> — trata o fato como <b>possível, duvidoso ou desejado</b>: <i>"Espero que ele estude."</i><br>
+  📣 <b>Imperativo</b> — dá uma <b>ordem, pedido ou conselho</b>: <i>"Estude!"</i></p>
+  <div class="destaque">💡 Dica de ouro: junte as palavras <b>Tempo</b>, <b>Modo</b>, <b>Número</b> e <b>Pessoa</b> — são as quatro coisas em que TODO verbo se flexiona. Nas próximas estações abrimos cada modo com calma.</div>`,
+  perguntas:[
+   {q:"Quais são as três grandes zonas de tempo do verbo? Dê um exemplo de cada com o verbo 'brincar'.",m:"Passado (Eu brinquei), presente (Eu brinco) e futuro (Eu brincarei)."},
+   {q:"O que o 'modo' do verbo mostra? Quais são os três modos?",m:"Mostra a atitude de quem fala diante do fato. São: indicativo (certeza), subjuntivo (possibilidade/desejo/dúvida) e imperativo (ordem/pedido)."},
+   {q:"Diga o modo de cada frase: 'Ele viaja amanhã.' e 'Talvez ele viaje amanhã.'",m:"'Ele viaja amanhã' está no indicativo (fato tratado como certo). 'Talvez ele viaje amanhã' está no subjuntivo (fato incerto, possível)."}
+  ]
+ },
+ {
+  titulo:"Modo Indicativo — o motor da certeza",
+  faixa:"Estação 4 · Indicativo",
+  corpo:`<p>O <b>modo indicativo</b> apresenta a ação como um <b>fato certo e real</b>. É o modo que a gente mais usa no dia a dia para contar o que aconteceu, o que acontece e o que vai acontecer.</p>
+  <div class="exemplo">"A Terra gira em volta do Sol."  (fato certo → indicativo)
+"Eu terminei a lição."          (fato certo → indicativo)</div>
+  <p>O indicativo tem <b>vários tempos</b>. Na sua prova, o foco são três (que vamos abrir na próxima estação):</p>
+  <p>🕐 <b>Presente</b> — agora ou sempre: <i>"Eu estudo todos os dias."</i><br>
+  🕑 <b>Pretérito perfeito</b> — ação já <b>concluída</b> no passado: <i>"Eu estudei ontem."</i><br>
+  🕒 <b>Futuro do presente</b> — ação <b>certa</b> que ainda vai ocorrer: <i>"Eu estudarei amanhã."</i></p>
+  <div class="destaque">⚠️ Cuidado para não confundir: o indicativo é o modo da <b>certeza</b>. Se a frase traz <b>dúvida ou desejo</b> ("espero que", "talvez", "se..."), aí NÃO é indicativo — é subjuntivo (Estação 6).</div>`,
+  perguntas:[
+   {q:"O que o modo indicativo apresenta sobre a ação?",m:"Apresenta a ação como um fato certo e real. É o modo da certeza, usado para contar o que aconteceu, acontece ou vai acontecer."},
+   {q:"Quais são os três tempos do indicativo que caem na prova?",m:"Presente, pretérito perfeito e futuro do presente."},
+   {q:"Por que a frase 'Espero que ele venha' NÃO está no indicativo?",m:"Porque traz um desejo/incerteza ('espero que'), e não uma certeza. Fato incerto ou desejado é modo subjuntivo, não indicativo."}
+  ]
+ },
+ {
+  titulo:"Tempos do Indicativo: presente, pretérito perfeito e futuro do presente",
+  faixa:"Estação 5 · Indicativo (tempos)",
+  corpo:`<p>Vamos abrir os três tempos do indicativo que a prova cobra, usando o verbo <b>estudar</b> (1ª conjugação) como modelo. Repare nas <b>terminações</b>.</p>
+  <h3>🕐 Presente do indicativo</h3>
+  <p>Ação que acontece <b>agora</b> ou que é <b>habitual</b> (sempre).</p>
+  <div class="exemplo">eu estudo · tu estudas · ele estuda
+nós estudamos · vós estudais · eles estudam</div>
+  <h3>🕑 Pretérito perfeito do indicativo</h3>
+  <p>Ação que <b>já terminou</b> (foi concluída) no passado. É o "passado que acabou".</p>
+  <div class="exemplo">eu estudei · tu estudaste · ele estudou
+nós estudamos · vós estudastes · eles estudaram</div>
+  <h3>🕒 Futuro do presente do indicativo</h3>
+  <p>Ação <b>certa</b> que ainda vai acontecer.</p>
+  <div class="exemplo">eu estudarei · tu estudarás · ele estudará
+nós estudaremos · vós estudareis · eles estudarão</div>
+  <div class="destaque">⚠️ Pegadinha clássica: o <b>pretérito perfeito</b> (Eu <b>brinquei</b>, ação que acabou) é diferente do pretérito <b>imperfeito</b> (Eu <b>brincava</b>, ação que se repetia/continuava no passado). A prova pede o <b>perfeito</b> — o do "acabou".</div>`,
+  perguntas:[
+   {q:"Quando usamos o presente do indicativo? Dê um exemplo.",m:"Para uma ação que acontece agora ou é habitual (sempre). Ex.: 'Eu estudo todos os dias' / 'Ela mora aqui'."},
+   {q:"O que o pretérito perfeito indica? Conjugue 'cantar' na 3ª pessoa do singular (ele).",m:"Indica uma ação já concluída no passado. 'Cantar' na 3ª pessoa do singular do pretérito perfeito: 'ele cantou'."},
+   {q:"Explique a diferença entre 'Eu brinquei' e 'Eu brincava'.",m:"'Eu brinquei' é pretérito perfeito: a ação começou e terminou no passado. 'Eu brincava' é pretérito imperfeito: a ação era habitual/continuada no passado (algo que eu costumava fazer)."}
+  ]
+ },
+ {
+  titulo:"Modo Subjuntivo — o motor do possível",
+  faixa:"Estação 6 · Subjuntivo",
+  corpo:`<p>O <b>modo subjuntivo</b> apresenta a ação como algo <b>incerto</b>: uma <b>possibilidade</b>, uma <b>dúvida</b>, um <b>desejo</b> ou uma <b>hipótese</b>. Ele quase sempre aparece acompanhado de palavras como <b>que</b>, <b>se</b>, <b>quando</b>, <b>talvez</b>, <b>tomara que</b>, <b>espero que</b>.</p>
+  <p>O subjuntivo tem <b>três tempos</b>. Veja com o verbo <b>estudar</b>:</p>
+  <h3>Presente do subjuntivo</h3>
+  <p>Costuma vir depois de "que". <i>"Espero <b>que</b> ele estude."</i></p>
+  <div class="exemplo">que eu estude · que tu estudes · que ele estude
+que nós estudemos · que vós estudeis · que eles estudem</div>
+  <h3>Pretérito imperfeito do subjuntivo</h3>
+  <p>Costuma vir depois de "se". <i>"<b>Se</b> ele estudasse, passaria."</i></p>
+  <div class="exemplo">se eu estudasse · se ele estudasse · se eles estudassem</div>
+  <h3>Futuro do subjuntivo</h3>
+  <p>Costuma vir depois de "quando" ou "se". <i>"<b>Quando</b> ele estudar, avisará."</i></p>
+  <div class="exemplo">quando eu estudar · quando ele estudar · quando eles estudarem</div>
+  <div class="destaque">💡 Marcadores do subjuntivo: <b>que, se, quando, talvez, tomara, espero que, caso</b>. Se você vê essas palavras puxando o verbo, desconfie do subjuntivo!</div>`,
+  perguntas:[
+   {q:"O que o modo subjuntivo apresenta sobre a ação?",m:"Apresenta a ação como algo incerto: possibilidade, dúvida, desejo ou hipótese. Não é um fato certo."},
+   {q:"Cite três palavras que costumam 'puxar' um verbo no subjuntivo.",m:"Por exemplo: que, se, quando, talvez, tomara que, espero que, caso (basta citar três)."},
+   {q:"Quais são os três tempos do subjuntivo? Dê um exemplo de frase com um deles.",m:"Presente ('Espero que ele estude'), pretérito imperfeito ('Se ele estudasse...') e futuro ('Quando ele estudar...')."}
+  ]
+ },
+ {
+  titulo:"Modo Imperativo — o motor da ordem",
+  faixa:"Estação 7 · Imperativo",
+  corpo:`<p>O <b>modo imperativo</b> serve para dar uma <b>ordem</b>, fazer um <b>pedido</b>, dar um <b>conselho</b> ou fazer um <b>convite</b>. É o modo de quem <b>manda ou pede algo</b> a alguém.</p>
+  <div class="exemplo">"Estude para a prova!"     (ordem/conselho)
+"Feche a porta, por favor."  (pedido)
+"Venham comemorar conosco!"  (convite)</div>
+  <p>O imperativo tem duas formas:</p>
+  <p>➕ <b>Imperativo afirmativo</b> — manda fazer: <i>"Estuda!" / "Estude!"</i><br>
+  ➖ <b>Imperativo negativo</b> — manda NÃO fazer: <i>"Não estudes!" / "Não estude!"</i></p>
+  <p>Uma curiosidade: o imperativo <b>não tem a 1ª pessoa do singular (eu)</b>. Faz sentido: a gente não dá ordem a si mesmo! Ele começa no "tu/você".</p>
+  <div class="destaque">⚠️ Pegadinha: uma frase com <b>ponto de exclamação</b> pedindo uma atitude ("Cuidado!", "Estude!", "Não corra!") normalmente está no <b>imperativo</b>. Procure a ideia de <b>ordem/pedido</b>.</div>`,
+  perguntas:[
+   {q:"Para que serve o modo imperativo? Dê dois exemplos de uso.",m:"Serve para dar ordem, pedido, conselho ou convite. Ex.: 'Estude!' (ordem/conselho) e 'Feche a porta, por favor' (pedido)."},
+   {q:"Qual a diferença entre imperativo afirmativo e negativo? Dê um exemplo de cada.",m:"O afirmativo manda fazer ('Estude!'); o negativo manda NÃO fazer ('Não estude!')."},
+   {q:"Por que o imperativo não tem a 1ª pessoa do singular (eu)?",m:"Porque não damos ordem a nós mesmos. Uma ordem é sempre dirigida a outra pessoa (tu/você, vós/vocês), então ele começa na 2ª pessoa."}
+  ]
+ },
+ {
+  titulo:"Formas nominais — infinitivo, gerúndio e particípio",
+  faixa:"Estação 8 · Formas nominais",
+  corpo:`<p>As <b>formas nominais</b> são três formas do verbo que, sozinhas, <b>não indicam tempo nem modo</b>. Elas se chamam "nominais" porque podem funcionar como <b>nome, adjetivo ou advérbio</b>. Cada uma tem uma <b>terminação</b> típica:</p>
+  <h3>🔹 Infinitivo → termina em -R</h3>
+  <p>É o "nome" do verbo, a forma que aparece no dicionário. <i>cantar, vender, partir</i>. Às vezes funciona como um substantivo: <i>"<b>Estudar</b> é importante."</i></p>
+  <h3>🔹 Gerúndio → termina em -NDO</h3>
+  <p>Indica ação <b>em andamento</b> (acontecendo). <i>cantando, vendendo, partindo</i>. <i>"Ele está <b>estudando</b> agora."</i></p>
+  <h3>🔹 Particípio → termina (em geral) em -DO</h3>
+  <p>Indica ação <b>concluída</b>; muitas vezes vira adjetivo. <i>cantado, vendido, partido</i>. <i>"A lição foi <b>estudada</b>." / "porta <b>fechada</b>".</i></p>
+  <div class="exemplo">Verbo ESTUDAR → infinitivo: estudar
+                → gerúndio: estudando
+                → particípio: estudado</div>
+  <div class="destaque">💡 Memorize pelas terminações: <b>-R</b> (infinitivo), <b>-NDO</b> (gerúndio), <b>-DO</b> (particípio). É a forma mais rápida de reconhecer cada uma na prova!</div>`,
+  perguntas:[
+   {q:"Quais são as três formas nominais e a terminação típica de cada uma?",m:"Infinitivo (termina em -R: cantar), gerúndio (termina em -NDO: cantando) e particípio (termina geralmente em -DO: cantado)."},
+   {q:"Dê as três formas nominais do verbo 'vender'.",m:"Infinitivo: vender; gerúndio: vendendo; particípio: vendido."},
+   {q:"O que indica o gerúndio e o que indica o particípio?",m:"O gerúndio indica ação em andamento (acontecendo agora: 'estudando'); o particípio indica ação concluída (já terminada: 'estudado', 'fechada')."}
+  ]
+ }
+];
+
+const PEGADINHAS=[
+ "<b>Verbo ≠ substantivo:</b> 'o <i>corredor</i>' é substantivo; 'ele <i>corre</i>' é verbo. Verbo é a ação, não o nome de quem a faz.",
+ "<b>Número não é a mesma coisa que pessoa:</b> 'nós' é 1ª pessoa e está no plural; não confunda as duas flexões.",
+ "<b>Pronome escondido:</b> 'Cantamos juntos' já é 1ª pessoa do plural (nós), mesmo sem a palavra 'nós' aparecer.",
+ "<b>Indicativo é certeza:</b> se a frase tem 'talvez', 'espero que', 'se...', NÃO é indicativo — é subjuntivo.",
+ "<b>Perfeito × imperfeito:</b> 'brinquei' (acabou) é pretérito perfeito; 'brincava' (repetia) é pretérito imperfeito. A prova pede o <b>perfeito</b>.",
+ "<b>Futuro do presente ≠ futuro do subjuntivo:</b> 'estudarei' (indicativo, certeza) é diferente de 'quando eu estudar' (subjuntivo).",
+ "<b>Imperativo não tem 'eu':</b> não se dá ordem a si mesmo; ele começa no 'tu/você'.",
+ "<b>Frase com '!' pedindo atitude</b> ('Estude!', 'Não corra!') costuma ser imperativo, não indicativo.",
+ "<b>Formas nominais não têm tempo próprio:</b> 'cantar', 'cantando' e 'cantado' não dizem sozinhas se é passado ou futuro.",
+ "<b>Cuidado com as terminações parecidas:</b> gerúndio termina em -NDO (correndo) e particípio em -DO (corrido). Uma letra muda tudo!"
+];
+
+let estado={respostas:{},conferido:{},auto:{},abertos:{}};
+try{const s=JSON.parse(localStorage.getItem(CHAVE)||'null');if(s)estado=s;}catch(e){}
+let mem={};
+
+function salvar(){
+  estado.ts=new Date().toLocaleString('pt-BR');
+  try{localStorage.setItem(CHAVE,JSON.stringify(estado));}catch(e){mem=estado;}
+  const el=document.getElementById('salvoInfo');if(el)el.textContent='💾 Salvo sozinho · último: '+estado.ts;
+}
+function render(){
+  const cont=document.getElementById('blocos');cont.innerHTML='';
+  BLOCOS.forEach((b,i)=>{
+    const desbloqueado = i===0 || estado.conferido[i-1];
+    const aberto = estado.abertos[i] && desbloqueado;
+    const div=document.createElement('div');
+    div.className='bloco'+(aberto?' aberto':'')+(desbloqueado?'':' bloqueado');
+    let perg='';
+    b.perguntas.forEach((p,j)=>{
+      const val=(estado.respostas[i]&&estado.respostas[i][j])||'';
+      const okcls=val.trim().length>=3?'ok':'';
+      const conf=estado.conferido[i];
+      const sel=(estado.auto[i]&&estado.auto[i][j])||'';
+      perg+=`<div class="pergunta">
+        <div class="pq">${j+1}) ${p.q}</div>
+        <textarea data-b="${i}" data-p="${j}" class="${okcls}" oninput="resp(${i},${j},this.value)" ${conf?'disabled':''}>${val.replace(/</g,'&lt;')}</textarea>
+        <div class="modelo ${conf?'mostra':''}" id="m${i}_${j}"><div class="mt">✅ Resposta-modelo</div>${p.m}</div>
+        <div class="auto ${conf?'mostra':''}"><span>Como você se saiu?</span>
+          <button class="a-ok ${sel==='ok'?'sel':''}" onclick="marcarAuto(${i},${j},'ok')">✅ Acertei</button>
+          <button class="a-rev ${sel==='rev'?'sel':''}" onclick="marcarAuto(${i},${j},'rev')">🔁 Preciso revisar</button>
+        </div>
+      </div>`;
+    });
+    div.innerHTML=`
+      <div class="bloco-cab" onclick="toggle(${i},${desbloqueado})">
+        <div class="nb">${desbloqueado?(i+1):'🔒'}</div>
+        <div class="tit"><small>${b.faixa}</small>${b.titulo}</div>
+        <div class="estado">${estado.conferido[i]?'✅':(desbloqueado?'▾':'🔒')}</div>
+      </div>
+      <div class="bloco-corpo">
+        ${b.corpo}
+        ${perg}
+        <div class="acao">
+          <button class="btn-conf" id="bc${i}" onclick="conferir(${i})" ${estado.conferido[i]?'disabled':''}>${estado.conferido[i]?'✅ Conferido':'🔍 Conferir respostas'}</button>
+          <div class="aviso" id="av${i}">⚠ Responda as 3 perguntas (pelo menos 3 letras em cada) para conferir.</div>
+        </div>
+      </div>`;
+    cont.appendChild(div);
+    atualizarBotao(i);
+  });
+  atualizarProgresso();
+  const done=BLOCOS.every((_,i)=>estado.conferido[i]);
+  document.getElementById('final').classList.toggle('mostra',done);
+}
+function toggle(i,desb){if(!desb)return;estado.abertos[i]=!estado.abertos[i];salvar();render();}
+function resp(i,j,v){if(!estado.respostas[i])estado.respostas[i]={};estado.respostas[i][j]=v;const t=event.target;t.classList.toggle('ok',v.trim().length>=3);atualizarBotao(i);salvar();}
+function atualizarBotao(i){const b=document.getElementById('bc'+i);if(!b||estado.conferido[i])return;const r=estado.respostas[i]||{};const ok=[0,1,2].every(j=>((r[j]||'').trim().length>=3));b.classList.toggle('ativo',ok);}
+function conferir(i){
+  const r=estado.respostas[i]||{};const ok=[0,1,2].every(j=>((r[j]||'').trim().length>=3));
+  if(!ok){document.getElementById('av'+i).style.display='block';return;}
+  estado.conferido[i]=true;if(i+1<BLOCOS.length)estado.abertos[i+1]=true;salvar();render();
+  const nb=document.getElementById('bc'+(i));
+  const alvo=document.querySelectorAll('.bloco')[Math.min(i+1,BLOCOS.length-1)];
+  if(alvo)alvo.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function marcarAuto(i,j,v){if(!estado.auto[i])estado.auto[i]={};estado.auto[i][j]=v;salvar();render();}
+function atualizarProgresso(){
+  const n=BLOCOS.filter((_,i)=>estado.conferido[i]).length;
+  const pct=Math.round(n/BLOCOS.length*100);
+  document.getElementById('progTxt').textContent=n+' de '+BLOCOS.length+' estações concluídas';
+  document.getElementById('progPct').textContent=pct+'%';
+  document.getElementById('progFill').style.width=pct+'%';
+}
+function exportar(){try{const b=new Blob([JSON.stringify(estado)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='cronos_leitura_guiada_progresso.json';a.click();}catch(e){}}
+function importar(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{estado=JSON.parse(ev.target.result);salvar();render();}catch(_){}}; r.readAsText(f);}
+function pedirZerar(){document.getElementById('overlay').classList.add('show');}
+function fecharModal(){document.getElementById('overlay').classList.remove('show');}
+function confirmarZerar(){estado={respostas:{},conferido:{},auto:{},abertos:{}};try{localStorage.removeItem(CHAVE);}catch(e){}fecharModal();render();}
+function initPegs(){document.getElementById('pegs').innerHTML=PEGADINHAS.map((p,i)=>`<div class="peg"><b>Armadilha ${i+1}.</b> ${p}</div>`).join('');}
+if(!estado.abertos)estado.abertos={};if(!estado.abertos[0])estado.abertos[0]=true;
+initPegs();render();
+if(estado.ts)document.getElementById('salvoInfo').textContent='💾 Salvo · último: '+estado.ts;
+</script>
+</body>
+</html>
